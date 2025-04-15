@@ -7,8 +7,6 @@ type TagsMenuProps = {
 };
 
 const TagsMenu: React.FC<TagsMenuProps> = ({ tags, onSelect, selectedTag }) => {
-  console.log("TagsMenu rendered");
-
   return (
     <ul className="flex flex-row gap-2 justify-center">
       <li>
