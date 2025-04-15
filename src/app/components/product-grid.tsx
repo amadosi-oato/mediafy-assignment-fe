@@ -37,7 +37,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
           selectedTag={selectedTag}
         />
       </section>
-      <section className="w-fit mx-auto grid grid-cols-3 justify-items-center justify-center gap-14 mt-10 mb-5">
+      <section className="w-fit mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 justify-items-center justify-center gap-14 mt-10 mb-5">
         {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
