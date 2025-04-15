@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { GetProductsResponse } from "../api/getProducts";
 import ProductCard from "./product-card";
 import TagsMenu from "./tags-menu";
@@ -14,14 +14,19 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  const tags = [...new Set(data.map((product) => product.tags).flat())];
+  const tags = useMemo(() => {
+    if (!data) return [];
+    return [...new Set(data.map((product) => product.tags).flat())];
+  }, [data]);
 
-  const filteredProducts = data.filter((product) => {
-    if (!selectedTag) {
-      return true;
-    }
-    return product.tags.includes(selectedTag);
-  });
+  const filteredProducts = useMemo(() => {
+    return data.filter((product) => {
+      if (!selectedTag) {
+        return true;
+      }
+      return product.tags.includes(selectedTag);
+    });
+  }, [data, selectedTag]);
 
   return (
     <>
