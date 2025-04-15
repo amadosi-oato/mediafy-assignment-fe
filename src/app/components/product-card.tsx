@@ -12,8 +12,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onSelect,
   isSelected,
 }) => {
-  console.log(`ProductCard ${product.id} rendered`);
-
   return (
     <div
       className={`w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl ${

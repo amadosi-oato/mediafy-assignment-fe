@@ -20,13 +20,22 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
   }, [data]);
 
   const filteredProducts = useMemo(() => {
-    return data.filter((product) => {
-      if (!selectedTag) {
-        return true;
+    let result = [...data];
+    // Filter by tag if selected
+    if (selectedTag) {
+      result = result.filter((product) => product.tags.includes(selectedTag));
+    }
+
+    // Remove selected product if it exists in filtered list to avoid duplicates
+    if (selectedId) {
+      result = result.filter((product) => product.id !== selectedId);
+      const selectedProduct = data.find((product) => product.id === selectedId);
+      if (selectedProduct) {
+        result = [selectedProduct, ...result];
       }
-      return product.tags.includes(selectedTag);
-    });
-  }, [data, selectedTag]);
+    }
+    return result;
+  }, [data, selectedTag, selectedId]);
 
   return (
     <>
